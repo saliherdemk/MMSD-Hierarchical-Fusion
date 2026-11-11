@@ -1,0 +1,6 @@
+/data
+**/.ipynb_checkpoints/
+/runs/
+**/__pycache__/
+.venv
+**/best.pt

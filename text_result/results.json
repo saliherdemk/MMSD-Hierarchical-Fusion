@@ -1,0 +1,22 @@
+{
+  "model": "text",
+  "seed": 42,
+  "selected_epoch": 2,
+  "best_validation_f1": 0.7914230019493177,
+  "test": {
+    "precision": 0.7195767195767195,
+    "recall": 0.8508863399374348,
+    "f1": 0.7797419971333015,
+    "accuracy": 0.8086342880863429,
+    "tp": 816,
+    "fp": 318,
+    "tn": 1132,
+    "fn": 143
+  },
+  "training_seconds_including_validation": 52.739632760000006,
+  "test_seconds_including_data_loading": 0.34022743500003116,
+  "peak_allocated_gpu_bytes_per_device": [
+    169441280
+  ],
+  "trainable_parameters": 3525569
+}
