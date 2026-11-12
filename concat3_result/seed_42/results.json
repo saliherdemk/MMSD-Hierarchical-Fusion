@@ -13,8 +13,8 @@
     "tn": 1250,
     "fn": 159
   },
-  "training_seconds_including_validation": 1443.959790538,
-  "test_seconds_including_data_loading": 73.10800181700006,
+  "training_seconds_including_validation": 7930.343362588,
+  "test_seconds_including_data_loading": 269.4694969379998,
   "peak_allocated_gpu_bytes_per_device": [
     285718016
   ],

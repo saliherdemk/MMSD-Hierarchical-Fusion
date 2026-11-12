@@ -1,0 +1,86 @@
+{
+  "precision": {
+    "mean": 0.7809629551014633,
+    "std": 0.016590089529870546
+  },
+  "recall": {
+    "mean": 0.8411539798401112,
+    "std": 0.007964156577955916
+  },
+  "f1": {
+    "mean": 0.8098245541698645,
+    "std": 0.006145317651769114
+  },
+  "accuracy": {
+    "mean": 0.842673308426733,
+    "std": 0.00720188940344439
+  },
+  "seeds": [
+    {
+      "model": "concat3",
+      "seed": 42,
+      "selected_epoch": 3,
+      "best_validation_f1": 0.8105590062111802,
+      "test": {
+        "precision": 0.8,
+        "recall": 0.8342022940563086,
+        "f1": 0.8167432363450741,
+        "accuracy": 0.8509755085097551,
+        "tp": 800,
+        "fp": 200,
+        "tn": 1250,
+        "fn": 159
+      },
+      "training_seconds_including_validation": 7930.343362588,
+      "test_seconds_including_data_loading": 269.4694969379998,
+      "peak_allocated_gpu_bytes_per_device": [
+        285718016
+      ],
+      "trainable_parameters": 5957290
+    },
+    {
+      "model": "concat3",
+      "seed": 43,
+      "selected_epoch": 4,
+      "best_validation_f1": 0.7979643765903308,
+      "test": {
+        "precision": 0.7732949087415946,
+        "recall": 0.8394160583941606,
+        "f1": 0.805,
+        "accuracy": 0.838107098381071,
+        "tp": 805,
+        "fp": 236,
+        "tn": 1214,
+        "fn": 154
+      },
+      "training_seconds_including_validation": 6511.855008438999,
+      "test_seconds_including_data_loading": 176.35548306300007,
+      "peak_allocated_gpu_bytes_per_device": [
+        310178816
+      ],
+      "trainable_parameters": 5957290
+    },
+    {
+      "model": "concat3",
+      "seed": 44,
+      "selected_epoch": 2,
+      "best_validation_f1": 0.8088088088088088,
+      "test": {
+        "precision": 0.7695939565627951,
+        "recall": 0.8498435870698644,
+        "f1": 0.8077304261645193,
+        "accuracy": 0.8389373183893731,
+        "tp": 815,
+        "fp": 244,
+        "tn": 1206,
+        "fn": 144
+      },
+      "training_seconds_including_validation": 5445.265652260998,
+      "test_seconds_including_data_loading": 182.35236337300012,
+      "peak_allocated_gpu_bytes_per_device": [
+        310525952
+      ],
+      "trainable_parameters": 5957290
+    }
+  ]
+}
