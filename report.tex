@@ -1,0 +1,186 @@
+\documentclass[conference]{IEEEtran}
+% No funding footnote: \IEEEoverridecommandlockouts is not needed.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{url}
+
+\begin{document}
+
+\title{A Literature Review of Hierarchical Fusion for Multimodal Sarcasm Detection}
+\author{\IEEEauthorblockN{[Author Name]}
+\IEEEauthorblockA{\textit{[Department, University]}\\
+[City, Country]\\
+[Email Address]}}
+\maketitle
+
+\begin{abstract}
+Sarcasm in social media can depend on a mismatch between a message and its attached image. This paper reviews research on sarcasm detection in paired tweets and images, focusing on the hierarchical fusion method introduced by Cai, Cai, and Wan in 2019. The method combines text, regional image features, and predicted image attributes through early fusion, representation fusion, and modality fusion. The review compares five relevant papers and explains the selected architecture and its published evidence. All reported results are attributed to their sources.
+\end{abstract}
+
+\begin{IEEEkeywords}
+multimodal learning, sarcasm detection, hierarchical fusion, reproducibility
+\end{IEEEkeywords}
+
+\section{Research Question, Scope, and Motivation}
+\subsection{Review Question}
+This review asks: \emph{How do multimodal sarcasm-detection methods represent and combine textual and visual evidence, and what evidence supports hierarchical fusion relative to simpler fusion?} The review centers on the model of Cai, Cai, and Wan~\cite{cai2019}, examining its assumptions, fusion stages, published comparisons, and relation to other work.
+
+\subsection{Motivation and Scope}
+A positive statement such as ``What wonderful weather'' may become sarcastic when accompanied by an image of dark clouds. Text alone need not reveal this contrast, while a global image descriptor need not identify the visual evidence relevant to the statement. Hierarchical fusion attempts to make the modalities inform one another rather than only appending their representations.
+
+The selected model is an earlier structured-fusion approach relative to newer transformer-based systems. Its inputs are two observed modalities, text and image. The authors treat image-derived attributes as a third modality; these attributes are an additional representation of the image, not an independently observed input.
+
+This paper reviews five studies and gives a technical account of the selected hierarchical-fusion method. Published scores are discussed as findings reported by their authors, not as results measured in this review.
+
+\subsection{Review Contributions}
+The paper contributes (1) a critical comparison of five relevant studies, (2) a technical explanation of the selected hierarchical-fusion architecture, and (3) an assessment of the evidence and reproducibility constraints reported in the literature.
+
+\section{Literature Search and Critical Synthesis}
+\subsection{Search and Selection Approach}
+The selection combines backward reference tracing from Cai et al.~\cite{cai2019} with searches for ``multimodal sarcasm detection,'' ``dynamic routing,'' and ``debiasing.'' Publication metadata and abstracts were consulted through ACL Anthology, arXiv, and publisher records. Papers were selected for distinct roles: the target hierarchical-fusion method, an earlier multimodal approach, a text-focused comparator, a newer fusion architecture, and bias-oriented work. This is a focused literature scan, not a systematic review.
+
+\subsection{Selected Studies}
+\subsubsection{Hierarchical fusion}
+Cai et al.~\cite{cai2019} propose attribute-guided text encoding, cross-modal feature reconstruction, and learned modality weighting. Their study compares the full model with text-only, two-way concatenation, and three-way concatenation baselines, and removes individual fusion stages in ablations.
+
+\subsubsection{Earlier multimodal sarcasm detection}
+Schifanella et al.~\cite{schifanella2016} provide an earlier investigation of sarcasm in multimodal social platforms. Cai et al. characterize that approach as combining textual and visual features through concatenation. It provides historical context for asking whether more structured fusion is necessary; differences in data and protocol limit direct numerical comparison.
+
+\subsubsection{Text-only neural representations}
+Poria et al.~\cite{poria2016} investigate convolutional representations informed by sentiment, emotion, and personality for sarcasm detection. Their work helps separate stronger language representations from gains attributable to image information. It is a literature comparator, not a claim that the selected paper's Bi-LSTM baseline reproduces Poria et al.'s system.
+
+\subsubsection{Dynamic cross-modal interaction}
+Tian et al.~\cite{tian2023} propose a Dynamic Routing Transformer Network that activates different routing modules with hierarchical co-attention for different image--text pairs. The authors argue that fixed interaction architectures can restrict adaptation to diverse forms of cross-modal incongruity. This provides a newer architectural contrast to the fixed stages of the 2019 model.
+
+\subsubsection{Bias-oriented learning}
+Jia, Xie, and Jing~\cite{jia2024} investigate debiasing multimodal sarcasm detection with contrastive learning. This paper is relevant to whether apparent multimodal gains depend on dataset-specific signals. The sources consulted here do not establish the exact bias definition, losses, datasets, or evaluation protocol, so no detailed efficacy claim is made.
+
+\subsection{Comparison Matrix}
+Table~\ref{tab:literature} summarizes the comparison. ``Not specified in consulted source'' marks details that cannot be confirmed from the material reviewed. Hardware availability or a linked code repository alone does not establish reproducibility.
+
+\begin{table*}[t]
+\caption{Five-Paper Comparison Matrix}
+\label{tab:literature}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{|p{0.075\textwidth}|p{0.105\textwidth}|p{0.105\textwidth}|p{0.12\textwidth}|p{0.12\textwidth}|p{0.105\textwidth}|p{0.105\textwidth}|p{0.12\textwidth}|}
+\hline
+\textbf{Paper} & \textbf{Question / contribution} & \textbf{Modalities / assumptions} & \textbf{Mechanism / objective} & \textbf{Data / protocol} & \textbf{Baselines / evidence} & \textbf{Resources / reproducibility} & \textbf{Limitations / connections} \\
+\hline
+Cai et al.~\cite{cai2019} & Structured fusion for tweet sarcasm; introduces dataset. & Text, image, five predicted attributes; paired inputs. & Attribute-initialized Bi-LSTM, guided attention, weighted fusion; cross-entropy. & 19,816 train; 2,410 dev; 2,409 test. Hashtag collection; manual dev/test checking. & Text-only, image-only, attribute-only, concatenation, stage ablations. & Frozen vision encoders during task training; GloVe; Adam. Image features not released; extraction details are limited. & Collection bias; limited common-sense interpretation; central paper. \\
+\hline
+Schifanella et al.~\cite{schifanella2016} & Earlier multimodal social-media sarcasm detection. & Text and images; paired content. & Feature concatenation as described by Cai et al.; exact objective not specified in consulted source. & Dataset versions, preprocessing, and split units not specified in consulted source. & Comparisons and ablations not specified in consulted source. & Code, weights, hardware, and configurations not specified in consulted source. & Historical simple-fusion comparator; cross-dataset scores not interchangeable. \\
+\hline
+Poria et al.~\cite{poria2016} & Richer text representations for sarcasm. & Text; auxiliary sentiment, emotion, personality knowledge. & Pretrained convolutional features; exact objectives not specified in consulted source. & Benchmark datasets and generalization protocol not specified in consulted source. & Authors report improvements; fairness and ablations not established here. & Training assets and compute details not specified in consulted source. & Text-focused context; not a matched multimodal baseline. \\
+\hline
+Tian et al.~\cite{tian2023} & Adaptive paths for cross-modal incongruity. & Paired text and images. & Dynamic routing and hierarchical transformer co-attention; loss details not specified in consulted source. & Public dataset; exact split and preprocessing not specified in consulted source. & Authors report comparisons; ablation details not established here. & Code linked from ACL Anthology; weights and hardware not specified in consulted source. & Newer architectural competitor. \\
+\hline
+Jia et al.~\cite{jia2024} & Debias multimodal sarcasm detection. & Multimodal sarcasm; detailed assumptions not established in consulted sources. & Contrastive-learning-based debiasing; loss details not established here. & Dataset and split details not established here. & Detailed controls and evidence not established here. & Code, checkpoint, hardware, and configuration details not established here. & Relevant to shortcut and generalization concerns. \\
+\hline
+\end{tabular}
+\end{table*}
+
+\subsection{Initial Synthesis and Limitations}
+The literature set separates three questions: whether images add useful evidence, how modalities should interact, and whether the resulting performance reflects reliable task signals. The selected model addresses interaction through staged attention and attribute guidance. Dynamic routing offers a later alternative to fixed interaction paths, while bias-oriented learning asks a different question about the evidence models exploit.
+
+The original hierarchical-fusion study supports its claim through comparisons and component ablations, but this does not establish that the same gains persist under different data snapshots, visual features, or preprocessing. Hashtag-based collection may introduce shortcuts even after explicit sarcasm terms are removed. A random split also does not establish performance on unseen authors or duplicate-free content; these are risks to investigate, not demonstrated leakage in the dataset.
+
+Accordingly, this review makes a narrow claim: the selected method reports gains over matched baselines in its own evaluation setting. Scores from different datasets or metric definitions are not ranked as though they came from one experiment.
+
+\section{Technical Explanation of the Selected Method}
+\subsection{Task and Notation}
+For tweet text $T$, attached image $I$, and binary label $y$, the model estimates $p(y=1\mid T,I)$. Let $\mathcal{M}=\{t,v,a\}$ denote text, visual features, and image attributes. Each representation supplies raw vectors $X_m^{(i)}$ and a guidance vector $g_m$. The following equations restate the source mechanism with distinct notation for guidance and reconstructed vectors~\cite{cai2019}.
+
+\subsection{Image and Attribute Representations}
+The paper specifies ResNet-50 V2 visual features from images resized to $448\times448$, yielding $14\times14=196$ regional vectors. Their average forms visual guidance:
+\begin{equation}
+g_v=\frac{1}{196}\sum_{i=1}^{196}X_v^{(i)}.
+\end{equation}
+The paper's description of the extraction layer and regional features leaves implementation details ambiguous: it describes regional extraction as well as a ResNet feature representation.
+
+A separate ResNet-101 attribute predictor is fine-tuned using 1,000 attributes extracted from COCO captions. The top five predicted attributes are embedded using 200-dimensional GloVe vectors $e(a_i)$. Learned attention produces attribute guidance:
+\begin{align}
+s_i &= w_a^{\mathsf T}\tanh(W_a e(a_i)+b_a)+c_a,\\
+\beta_i &= \frac{\exp(s_i)}{\sum_{j=1}^{5}\exp(s_j)},\\
+g_a &= \sum_{i=1}^{5}\beta_i e(a_i).
+\end{align}
+The matrices, vectors, and biases in these expressions are trainable. Attributes provide linguistic concepts associated with the image, but prediction errors can affect both text encoding and later fusion.
+
+\subsection{Attribute-Guided Text Encoding: Early Fusion}
+Tweet tokens are embedded with GloVe and processed by a bidirectional long short-term memory network (Bi-LSTM). Rather than zero initialization, attribute guidance determines the forward and backward hidden and cell states:
+\begin{equation}
+[h_{f0};h_{b0};c_{f0};c_{b0}]=\operatorname{ReLU}(W_0g_a+b_0).
+\end{equation}
+Here $[\,;\,]$ denotes concatenation. The token representation concatenates the forward and backward hidden states, $X_t^{(i)}=[h_{fi};h_{bi}]$, and guidance is their mean:
+\begin{equation}
+g_t=\frac{1}{L}\sum_{i=1}^{L}X_t^{(i)},
+\end{equation}
+where $L$ is the tweet length. The paper reports an LSTM hidden size of 256. Padding and sequence-length handling affect the computation of these averages.
+
+\subsection{Representation Fusion}
+For each raw sequence belonging to modality $m$, every modality $n$ supplies guidance for an attention distribution:
+\begin{align}
+s_{mn}^{(i)}&=w_{mn}^{\mathsf T}\tanh\!\left(W_{mn}[X_m^{(i)};g_n]+b_{mn}\right)+c_{mn},\\
+\alpha_{mn}^{(i)}&=\frac{\exp(s_{mn}^{(i)})}{\sum_{j=1}^{L_m}\exp(s_{mn}^{(j)})},\\
+\alpha_m^{(i)}&=\frac{1}{3}\sum_{n\in\mathcal{M}}\alpha_{mn}^{(i)},\\
+r_m&=\sum_{i=1}^{L_m}\alpha_m^{(i)}X_m^{(i)}.
+\end{align}
+The sequence lengths are $L_t=L$, $L_v=196$, and $L_a=5$. Attention is normalized over the raw positions of the target modality, and the three guidance-specific distributions are averaged. Thus each reconstructed vector $r_m$ uses information from all guidance vectors, including its own modality.
+
+\subsection{Modality Fusion and Classification}
+Each reconstructed vector is projected to a shared feature space and assigned a scalar score:
+\begin{align}
+z_m&=\tanh(P_mr_m+d_m),\\
+q_m&=u_m^{\mathsf T}\tanh(A_mr_m+b_m)+c_m,\\
+\pi_m&=\frac{\exp(q_m)}{\sum_{n\in\mathcal{M}}\exp(q_n)},\\
+z&=\sum_{m\in\mathcal{M}}\pi_m z_m.
+\end{align}
+A two-layer fully connected classifier with a ReLU hidden activation and sigmoid output maps $z$ to probability $p$. Training minimizes binary cross-entropy:
+\begin{equation}
+\mathcal{L}=-\frac{1}{N}\sum_{k=1}^{N}\left[y_k\log p_k+(1-y_k)\log(1-p_k)\right].
+\end{equation}
+The paper also specifies classification-layer regularization. Vision-model parameters are fixed during task training; text and attribute embeddings are updated. The reported optimizer is Adam with learning rate $0.001$, batch size 32, gradient clipping at 5, and early-stop patience 5. The fused vector size is 512.
+
+\subsection{Published Evidence and Interpretation}
+Table~\ref{tab:published} lists selected values reported by Cai et al.~\cite{cai2019}. The F-score is for the sarcastic positive class, not a reported macro-F1. These are published findings, not measurements from this review.
+
+\begin{table}[t]
+\caption{Selected Results Reported by Cai et al.; Not Local Measurements}
+\label{tab:published}
+\centering
+\begin{tabular}{lcc}
+\hline
+Model & F1 & Accuracy\\
+\hline
+Text Bi-LSTM & 0.7753 & 0.8190\\
+Text--image concatenation & 0.7799 & 0.8103\\
+Three-way concatenation & 0.7874 & 0.8174\\
+Without early fusion & 0.7880 & 0.8240\\
+Without representation fusion & 0.7902 & 0.8223\\
+Full hierarchical fusion & 0.8018 & 0.8344\\
+\hline
+\end{tabular}
+\end{table}
+
+The full model exceeds three-way concatenation by 1.44 F1 percentage points in the authors' evaluation. Removing early or representation fusion reduces the reported F1, supporting their contribution within that protocol. The paper also reports paired sign tests against selected baselines. However, it does not provide a multi-seed uncertainty estimate for these scores; a statistically significant paired comparison does not quantify training variability.
+
+The dataset contains 19,816 training, 2,410 development, and 2,409 test examples. Positive examples were collected using sarcasm-related hashtags; negative examples lacked those hashtags. The authors describe filtering explicit cues and manually checking development and test labels. The paper's failure analysis includes a socially meaningful insulting gesture that image features and predicted attributes fail to interpret. This illustrates a representational limitation; the example alone does not show how broadly that limitation affects model performance.
+
+\section*{AI Assistance Disclosure}
+OpenCode with an OpenAI language model assisted with source discovery, report drafting, mathematical restatement, and IEEE-style \LaTeX{} formatting. The author is responsible for source accuracy and all claims in this paper.
+
+\begin{thebibliography}{00}
+\bibitem{cai2019} Y. Cai, H. Cai, and X. Wan, ``Multi-modal sarcasm detection in Twitter with hierarchical fusion model,'' in \emph{Proc. 57th Annual Meeting of the Association for Computational Linguistics}, 2019, pp. 2506--2515.
+\bibitem{schifanella2016} R. Schifanella, P. de Juan, J. R. Tetreault, and L. Cao, ``Detecting sarcasm in multimodal social platforms,'' arXiv:1608.02289, 2016. [Online]. Available: \url{https://arxiv.org/abs/1608.02289}
+\bibitem{poria2016} S. Poria, E. Cambria, D. Hazarika, and P. Vij, ``A deeper look into sarcastic tweets using deep convolutional neural networks,'' in \emph{Proc. COLING}, 2016. [Online]. Available: \url{https://arxiv.org/abs/1610.08815}
+\bibitem{tian2023} Y. Tian, N. Xu, R. Zhang, and W. Mao, ``Dynamic routing transformer network for multimodal sarcasm detection,'' in \emph{Proc. 61st Annual Meeting of the Association for Computational Linguistics}, 2023, pp. 2468--2480, doi: 10.18653/v1/2023.acl-long.139.
+\bibitem{jia2024} M. Jia, C. Xie, and L. Jing, ``Debiasing multimodal sarcasm detection with contrastive learning,'' in \emph{Proc. AAAI Conference on Artificial Intelligence}, vol. 38, no. 16, 2024, pp. 18354--18362, doi: 10.1609/aaai.v38i16.29795.
+\end{thebibliography}
+
+\end{document}

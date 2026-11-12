@@ -1,0 +1,22 @@
+{
+  "model": "concat3",
+  "seed": 42,
+  "selected_epoch": 2,
+  "best_validation_f1": 0.8014440433212996,
+  "test": {
+    "precision": 0.7794117647058824,
+    "recall": 0.8289885297184567,
+    "f1": 0.8034360788276907,
+    "accuracy": 0.8385222083852221,
+    "tp": 795,
+    "fp": 225,
+    "tn": 1225,
+    "fn": 164
+  },
+  "training_seconds_including_validation": 1264.2692106200002,
+  "test_seconds_including_data_loading": 57.51806128200019,
+  "peak_allocated_gpu_bytes_per_device": [
+    285718016
+  ],
+  "trainable_parameters": 5957290
+}

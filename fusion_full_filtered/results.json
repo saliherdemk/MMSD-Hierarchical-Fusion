@@ -1,0 +1,12 @@
+{
+  "selected_epoch": 3,
+  "best_validation_f1": 0.8076728924785462,
+  "test": {
+    "precision": 0.7713736791546589,
+    "recall": 0.8373305526590198,
+    "f1": 0.803,
+    "accuracy": 0.8364466583644666
+  },
+  "training_seconds": 4657.480941553,
+  "test_seconds": 158.70256477399926
+}
