@@ -1,13 +1,13 @@
 {
   "seed": 44,
-  "selected_epoch": 8,
-  "best_validation_f1": 0.8070175438596491,
+  "selected_epoch": 2,
+  "best_validation_f1": 0.8044579533941236,
   "test": {
-    "precision": 0.7576335877862596,
-    "recall": 0.8279457768508863,
-    "f1": 0.7912306925759841,
-    "accuracy": 0.8260689082606891
+    "precision": 0.7727272727272727,
+    "recall": 0.8508863399374348,
+    "f1": 0.8099255583126551,
+    "accuracy": 0.8410128684101287
   },
-  "training_seconds": 1061.8305716970003,
-  "test_seconds": 27.713235020999946
+  "training_seconds": 1130.0540173090003,
+  "test_seconds": 34.921430949999376
 }

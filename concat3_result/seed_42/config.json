@@ -1,5 +1,8 @@
 {
   "model": "concat3",
+  "variant": "imagenet_features_own_attributes_packed",
+  "attribute_predictions": "/kaggle/input/datasets/fruich/resnet101-coco/resnet101_coco_attributes/extract_all",
+  "attribute_embedding": "trainable",
   "seed": 42,
   "batch_size": 32,
   "max_epochs": 8,
@@ -8,6 +11,7 @@
   "lr_decay_per_epoch": 0.8,
   "l2": 1e-07,
   "sequence_length": 75,
+  "text_padding": "packed_lstm_masked_mean",
   "hidden_size": 256,
   "input_dropout": 0.2,
   "positive_weight": 1.292987734320759,

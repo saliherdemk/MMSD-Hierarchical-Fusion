@@ -2,21 +2,21 @@
   "model": "concat3",
   "seed": 44,
   "selected_epoch": 2,
-  "best_validation_f1": 0.8088088088088088,
+  "best_validation_f1": 0.8076923076923077,
   "test": {
-    "precision": 0.7695939565627951,
-    "recall": 0.8498435870698644,
-    "f1": 0.8077304261645193,
-    "accuracy": 0.8389373183893731,
-    "tp": 815,
-    "fp": 244,
-    "tn": 1206,
-    "fn": 144
+    "precision": 0.7913741223671013,
+    "recall": 0.8227320125130344,
+    "f1": 0.8067484662576687,
+    "accuracy": 0.8430884184308842,
+    "tp": 789,
+    "fp": 208,
+    "tn": 1242,
+    "fn": 170
   },
-  "training_seconds_including_validation": 5445.265652260998,
-  "test_seconds_including_data_loading": 182.35236337300012,
+  "training_seconds_including_validation": 748.6644131170001,
+  "test_seconds_including_data_loading": 23.11181120299989,
   "peak_allocated_gpu_bytes_per_device": [
-    310525952
+    308857344
   ],
-  "trainable_parameters": 5957290
+  "trainable_parameters": 6157690
 }

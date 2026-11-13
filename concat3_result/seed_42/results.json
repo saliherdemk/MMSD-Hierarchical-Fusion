@@ -1,22 +1,22 @@
 {
   "model": "concat3",
   "seed": 42,
-  "selected_epoch": 3,
-  "best_validation_f1": 0.8105590062111802,
+  "selected_epoch": 2,
+  "best_validation_f1": 0.8049627791563275,
   "test": {
-    "precision": 0.8,
-    "recall": 0.8342022940563086,
-    "f1": 0.8167432363450741,
-    "accuracy": 0.8509755085097551,
-    "tp": 800,
-    "fp": 200,
-    "tn": 1250,
-    "fn": 159
+    "precision": 0.7565055762081785,
+    "recall": 0.848800834202294,
+    "f1": 0.8,
+    "accuracy": 0.8310502283105022,
+    "tp": 814,
+    "fp": 262,
+    "tn": 1188,
+    "fn": 145
   },
-  "training_seconds_including_validation": 7930.343362588,
-  "test_seconds_including_data_loading": 269.4694969379998,
+  "training_seconds_including_validation": 1118.963117382,
+  "test_seconds_including_data_loading": 53.16642307999996,
   "peak_allocated_gpu_bytes_per_device": [
-    285718016
+    282908672
   ],
-  "trainable_parameters": 5957290
+  "trainable_parameters": 6157690
 }
