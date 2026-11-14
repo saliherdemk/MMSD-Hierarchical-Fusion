@@ -1,0 +1,14 @@
+{
+  "seed": 42,
+  "selected_epoch": 2,
+  "best_validation_f1": 0.8175542406311637,
+  "test": {
+    "precision": 0.7495429616087751,
+    "recall": 0.8550573514077163,
+    "f1": 0.7988309790550414,
+    "accuracy": 0.8285595682855957
+  },
+  "training_seconds": 1258.6474747969996,
+  "test_seconds": 45.552223165000214,
+  "trainable_parameters": 14909926
+}
