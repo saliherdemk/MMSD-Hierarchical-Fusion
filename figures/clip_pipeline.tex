@@ -1,0 +1,29 @@
+% Original vector schematic; compiled as part of report.tex.
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small,
+              minimum height=10mm, text width=35mm, fill=black!3},
+  changed/.style={box, draw=blue!65!black, fill=blue!6},
+  flow/.style={-{Latex[length=2mm]}, thick}]
+\node[box] (image) at (0,0) {Tweet image};
+\node[box] (resnet) at (4.1,0.85) {Fixed fine-tuned ResNet-50 V2};
+\node[changed] (clip) at (4.1,-0.85) {Frozen CLIP\\image encoder};
+\node[box] (regions) at (8.3,0.85) {196 regional\\image vectors};
+\node[changed] (ranking) at (8.3,-0.85) {Cosine rankings:\\descriptive / affect};
+\node[changed] (prompts) at (4.1,-2.65) {996 descriptive prompts;\\8 affect + neutral};
+\node[changed] (selection) at (12.5,-0.85) {4 descriptions + affect;\\5 descriptions if neutral};
+\node[box] (embed) at (12.5,-2.65) {Five trainable\\200-D GloVe vectors};
+\node[box] (tweet) at (0,-4.35) {Tweet tokens\\and GloVe vectors};
+\node[box] (fusion) at (8.3,-4.35) {Attribute-guided Bi-LSTM;\\representation attention;\\modality weighting};
+\node[box] (output) at (12.5,-4.35) {Sarcasm probability};
+\draw[flow] (image.east) -- ++(0.25,0) |- (resnet.west);
+\draw[flow] (image.east) -- ++(0.25,0) |- (clip.west);
+\draw[flow] (resnet) -- (regions);
+\draw[flow] (clip) -- (ranking);
+\draw[flow] (prompts.east) -| node[below, pos=0.25, font=\scriptsize] {frozen CLIP text encoder} (ranking.south);
+\draw[flow] (ranking) -- (selection);
+\draw[flow] (selection) -- (embed);
+\draw[flow] (embed.south) |- ([yshift=4mm]fusion.north east) -- (fusion.north east);
+\draw[flow] (regions.north) -- ++(0,0.5) -| (16, -3.35) -| (fusion.north);
+\draw[flow] (tweet) -- (fusion);
+\draw[flow] (fusion) -- (output);
+\end{tikzpicture}

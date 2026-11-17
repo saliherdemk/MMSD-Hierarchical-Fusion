@@ -1,0 +1,16 @@
+{
+  "seed": 42,
+  "selected_epoch": 2,
+  "best_validation_f1": 0.799408575653031,
+  "test": {
+    "precision": 0.7506849315068493,
+    "recall": 0.8571428571428571,
+    "f1": 0.8003894839337877,
+    "accuracy": 0.8298048982980489
+  },
+  "test_gate_mean": 0.27488342993001613,
+  "test_gate_std": 0.07571860598084736,
+  "training_seconds": 1340.689319418,
+  "test_seconds": 62.72995526799991,
+  "trainable_parameters": 14909127
+}
