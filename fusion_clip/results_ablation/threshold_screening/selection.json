@@ -1,0 +1,39 @@
+{
+  "selected_threshold": 0.0,
+  "selected_variant": "margin_0",
+  "criterion": "highest seed-42 validation positive-class F1; smaller threshold breaks exact ties",
+  "screening": [
+    {
+      "threshold": 0.0,
+      "variant": "margin_0",
+      "seed": 42,
+      "validation_f1": 0.8175542406311637,
+      "selected_epoch": 2,
+      "validation_insertion_rate": 0.866390041493776
+    },
+    {
+      "threshold": 0.01,
+      "variant": "margin_0p01",
+      "seed": 42,
+      "validation_f1": 0.8100641341884558,
+      "selected_epoch": 4,
+      "validation_insertion_rate": 0.5755186721991701
+    },
+    {
+      "threshold": 0.02,
+      "variant": "margin_0p02",
+      "seed": 42,
+      "validation_f1": 0.8144382308083375,
+      "selected_epoch": 2,
+      "validation_insertion_rate": 0.24315352697095435
+    },
+    {
+      "threshold": 0.04,
+      "variant": "margin_0p04",
+      "seed": 42,
+      "validation_f1": 0.8071794871794872,
+      "selected_epoch": 2,
+      "validation_insertion_rate": 0.007053941908713693
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "variant": "margin_0",
+  "seed": 42,
+  "selected_epoch": 2,
+  "validation": {
+    "precision": 0.775491113189897,
+    "recall": 0.8644421272158499,
+    "f1": 0.8175542406311637,
+    "accuracy": 0.8464730290456431,
+    "tp": 829,
+    "fp": 240,
+    "tn": 1211,
+    "fn": 130
+  },
+  "training_seconds": 1229.4087688960003,
+  "positive_weight": 1.292987734320759,
+  "trainable_parameters": 14909926,
+  "peak_allocated_gpu_bytes": 450210304,
+  "output_hashes": {
+    "best.pt": "fa50eff906dbdd80af08a602195d7e7837b067400d1ad5e54074d37921205ca5",
+    "history.json": "6cc6c62a09ce826e3c338382eb0d34b47b4e577704dc56afd944d973ecf33d4c",
+    "validation_predictions.csv": "f03877187f4ca1ec59e9e4d036ef30c19612d45c1437bcc793a9de51a14a813a"
+  }
+}

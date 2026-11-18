@@ -4,6 +4,7 @@ import csv
 import hashlib
 import json
 import math
+import re
 from pathlib import Path
 from statistics import mean, stdev
 
@@ -19,6 +20,7 @@ FAMILIES = {
     'Filtered COCO attributes': 'fusion_full_filtered',
     'Attribute dropout': 'fusion_attribute_dropout',
     'Gated early fusion': 'fusion_gated',
+    'HFM, descriptive-only CLIP': 'fusion_clip/results_ablation/descriptive_only',
 }
 
 
@@ -40,10 +42,30 @@ def close(actual, expected):
 
 
 def table(filename, columns, heading, rows):
-    lines = [r'\begin{tabular}{' + columns + '}', r'\toprule', heading + r' \\', r'\midrule']
-    lines.extend(' & '.join(row) + r' \\' for row in rows)
+    # Match the paper's spacing style without changing numeric signs or math.
+    def wording(text):
+        return re.sub(r'(?<=\w)-+(?=\w)', ' ', text)
+
+    lines = [r'\begin{tabular}{' + columns + '}', r'\toprule', wording(heading) + r' \\', r'\midrule']
+    lines.extend(' & '.join(wording(cell) for cell in row) + r' \\' for row in rows)
     lines.extend([r'\bottomrule', r'\end{tabular}'])
     (OUT / filename).write_text('\n'.join(lines) + '\n')
+
+
+def check_validation(path, expected, reference_labels, hashes):
+    rows = list(csv.DictReader(path.open()))
+    labels = {row['tweet_id']: int(row['label']) for row in rows}
+    assert len(rows) == len(labels) == 2410
+    if reference_labels is not None:
+        assert labels == reference_labels
+    for row in rows:
+        probability = float(row['probability'])
+        assert math.isfinite(probability) and 0 <= probability <= 1
+        assert int(row['prediction']) == int(probability > 0.5)
+    for key, value in metrics(rows).items():
+        close(value, expected[key])
+    hashes[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
+    return labels
 
 
 def main():
@@ -53,6 +75,8 @@ def main():
     OUT.mkdir(exist_ok=True)
     predictions, results, summaries, hashes = {}, {}, {}, {}
     reference_labels = None
+    validation_labels = None
+    validation_checked = 0
     checked = 0
     for name, folder in FAMILIES.items():
         path = ROOT / folder
@@ -67,6 +91,10 @@ def main():
             best = max(history, key=lambda record: record['validation']['f1'])
             close(best['validation']['f1'], result['best_validation_f1'])
             assert best['epoch'] == result['selected_epoch']
+            if (run / 'validation_predictions.csv').exists():
+                validation_labels = check_validation(
+                    run / 'validation_predictions.csv', best['validation'], validation_labels, hashes)
+                validation_checked += 1
             for file in sorted(run.glob('test_predictions*.csv')):
                 rows = list(csv.DictReader(file.open()))
                 assert len(rows) == 2409
@@ -108,7 +136,7 @@ def main():
     table('exploratory.tex', 'lrr', r'Attribute intervention & Test F1 & $\Delta$ F1 (pp)',
           [[name, percentage(name, 'f1'),
             f"{100 * (summaries[name]['f1']['mean'] - summaries['HFM, COCO attributes']['f1']['mean']):+.2f}"]
-           for name in [*list(FAMILIES)[6:], 'HFM, CLIP attributes']])
+           for name in [*list(FAMILIES)[6:9], 'HFM, CLIP attributes']])
     resource_rows = []
     for name in main_names:
         records = results[name]
@@ -127,11 +155,45 @@ def main():
         delta = metrics(list(clip.values()))['f1'] - metrics(list(baseline.values()))['f1']
         pairs.append([str(seed), str(corrected), str(introduced), f'{delta * 100:+.2f}'])
     table('paired_errors.tex', 'rrrr', r'Seed & Corrected & Introduced & $\Delta$ F1 (pp)', pairs)
+
+    clip_names = ['HFM, descriptive-only CLIP', 'HFM, CLIP attributes']
+    table('clip_ablation.tex', 'lrrrr', r'Attribute rule & Precision & Recall & F1 & Accuracy',
+          [[label] + [percentage(name, key) for key in ('precision', 'recall', 'f1', 'accuracy')]
+           for label, name in zip(['Descriptive-only', r'Sentiment-aware ($\tau=0$)'], clip_names)])
+    table('clip_ablation_seeds.tex', 'rrrr',
+          r'Seed & Descriptive-only & Sentiment-aware & $\Delta$ F1 (pp)',
+          [[str(seed), *[f"{100 * results[name][i]['test']['f1']:.2f}" for name in clip_names],
+            f"{100 * (results[clip_names[1]][i]['test']['f1'] - results[clip_names[0]][i]['test']['f1']):+.2f}"]
+           for i, seed in enumerate((42, 43, 44))])
+    screening = ROOT / 'fusion_clip/results_ablation/threshold_screening'
+    selection = json.loads((screening / 'selection.json').read_text())
+    assert [row['threshold'] for row in selection['screening']] == [0, 0.01, 0.02, 0.04]
+    for row in selection['screening']:
+        run = screening / 'seed_42' / row['variant']
+        result = json.loads((run / 'validation_result.json').read_text())
+        history = json.loads((run / 'history.json').read_text())
+        best = max(history, key=lambda item: item['validation']['f1'])
+        assert result['seed'] == row['seed'] == 42
+        assert best['epoch'] == result['selected_epoch'] == row['selected_epoch']
+        close(best['validation']['f1'], row['validation_f1'])
+        for metric, value in best['validation'].items():
+            close(value, result['validation'][metric])
+        validation_labels = check_validation(
+            run / 'validation_predictions.csv', result['validation'], validation_labels, hashes)
+        validation_checked += 1
+    winner = min(selection['screening'], key=lambda row: (-row['validation_f1'], row['threshold']))
+    assert winner['threshold'] == selection['selected_threshold']
+    assert winner['variant'] == selection['selected_variant']
+    table('clip_thresholds.tex', 'rrr', r'Margin $\tau$ & Validation F1 & Affect insertion (\%)',
+          [[f"{row['threshold']:g}", f"{100 * row['validation_f1']:.2f}",
+            f"{100 * row['validation_insertion_rate']:.2f}"] for row in selection['screening']])
     audit = {'checked_prediction_files': checked, 'rows_per_file': 2409,
+             'checked_validation_files': validation_checked, 'validation_rows_per_file': 2410,
              'checks': 'labels, IDs, threshold, metrics, summaries, validation checkpoint selection',
              'prediction_sha256': hashes}
     (OUT / 'audit.json').write_text(json.dumps(audit, indent=2) + '\n')
-    print(f'Verified {checked} prediction files and nine experiment summaries; wrote {OUT}')
+    print(f'Verified {checked} test and {validation_checked} validation prediction files '
+          f'and {len(FAMILIES)} experiment summaries; wrote {OUT}')
 
 
 if __name__ == '__main__':

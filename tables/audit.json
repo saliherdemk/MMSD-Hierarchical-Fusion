@@ -1,6 +1,8 @@
 {
-  "checked_prediction_files": 33,
+  "checked_prediction_files": 36,
   "rows_per_file": 2409,
+  "checked_validation_files": 7,
+  "validation_rows_per_file": 2410,
   "checks": "labels, IDs, threshold, metrics, summaries, validation checkpoint selection",
   "prediction_sha256": {
     "text_only/seed_42/test_predictions.csv": "28e8df52751b52ad8a72a28661304ff49bf5a3a21c631d0df88f95963c11b220",
@@ -35,6 +37,16 @@
     "fusion_attribute_dropout/seed_44/test_predictions_shuffled.csv": "b97b3c1fa935d8c7e94bb7672f76fb8c76b8b3d68670ffaeff63740730e54546",
     "fusion_gated/seed_42/test_predictions.csv": "64d55ab22c17f0848a7cc839941ed85ddde262149f55c41b3740cdc27c7bd35f",
     "fusion_gated/seed_43/test_predictions.csv": "a22f7059912795ec4ff8ca8e4f13f4e14a5714a3d807a2d2c23b12bd2c96fe24",
-    "fusion_gated/seed_44/test_predictions.csv": "6343e6e96019994d3d130c35352e455f9255614b4168e39a64850e9a4a668f9c"
+    "fusion_gated/seed_44/test_predictions.csv": "6343e6e96019994d3d130c35352e455f9255614b4168e39a64850e9a4a668f9c",
+    "fusion_clip/results_ablation/descriptive_only/seed_42/validation_predictions.csv": "fb5ee991c708023a2e991840c5a42f4d4732e2e4ac0632358181fa5c93038e4f",
+    "fusion_clip/results_ablation/descriptive_only/seed_42/test_predictions.csv": "c2e858f12b3afa5c9fbc391a642735569e04061b11e1fc91d0204daf5ff88333",
+    "fusion_clip/results_ablation/descriptive_only/seed_43/validation_predictions.csv": "e44fbbd43e0a2c07d6b645c7549d096df05bfb7437dcfcc818dfce074c8c9242",
+    "fusion_clip/results_ablation/descriptive_only/seed_43/test_predictions.csv": "4444365bf9bce13f3f7f8694e3c6c166297db62eb8864bb71bde326692b6c81d",
+    "fusion_clip/results_ablation/descriptive_only/seed_44/validation_predictions.csv": "903af5ffea4e07ac2de3192b833af43262a192128ace829cfb7f43f949481afe",
+    "fusion_clip/results_ablation/descriptive_only/seed_44/test_predictions.csv": "db297d4599b7b196c58d2e60516071e61dd3fc699288b975ca89eeac33f2275c",
+    "fusion_clip/results_ablation/threshold_screening/seed_42/margin_0/validation_predictions.csv": "f03877187f4ca1ec59e9e4d036ef30c19612d45c1437bcc793a9de51a14a813a",
+    "fusion_clip/results_ablation/threshold_screening/seed_42/margin_0p01/validation_predictions.csv": "dd3c8c111dfc351ceae1705d9b6d97fd76db03a5784e534935b2108b8ee62be4",
+    "fusion_clip/results_ablation/threshold_screening/seed_42/margin_0p02/validation_predictions.csv": "c65c54c4657ddb57b3c42e341c330bc9ad728931d5d0e32d9831feb83a322d3b",
+    "fusion_clip/results_ablation/threshold_screening/seed_42/margin_0p04/validation_predictions.csv": "24319ba8b31ca7092a91cb53f3d9286bdfdafd810583b3beb1148b6fc0467c94"
   }
 }

@@ -1,0 +1,83 @@
+{
+  "precision": {
+    "mean": 0.7430699249373153,
+    "std": 0.010594126605836453
+  },
+  "recall": {
+    "mean": 0.8606187000347584,
+    "std": 0.01172034431705764
+  },
+  "f1": {
+    "mean": 0.7974335317023137,
+    "std": 0.0010348984086382155
+  },
+  "accuracy": {
+    "mean": 0.8259305382593053,
+    "std": 0.003456481526718342
+  },
+  "seeds": [
+    {
+      "variant": "descriptive_only",
+      "seed": 42,
+      "selected_epoch": 2,
+      "best_validation_f1": 0.8082123184777166,
+      "test": {
+        "precision": 0.754874651810585,
+        "recall": 0.8477580813347236,
+        "f1": 0.7986247544204322,
+        "accuracy": 0.8298048982980489,
+        "tp": 813,
+        "fp": 264,
+        "tn": 1186,
+        "fn": 146
+      },
+      "training_seconds": 994.8858494770002,
+      "test_seconds": 47.897926400999495,
+      "trainable_parameters": 14909926,
+      "checkpoint_sha256": "b942f2eb76bc352f85cc83605e10a2d9f588d2ec9ded3f0ecbef8b978f72dfa9",
+      "predictions_sha256": "c2e858f12b3afa5c9fbc391a642735569e04061b11e1fc91d0204daf5ff88333"
+    },
+    {
+      "variant": "descriptive_only",
+      "seed": 43,
+      "selected_epoch": 3,
+      "best_validation_f1": 0.813953488372093,
+      "test": {
+        "precision": 0.7343887423043096,
+        "recall": 0.8706986444212722,
+        "f1": 0.7967557251908397,
+        "accuracy": 0.8231631382316313,
+        "tp": 835,
+        "fp": 302,
+        "tn": 1148,
+        "fn": 124
+      },
+      "training_seconds": 1199.7493943230002,
+      "test_seconds": 6.192434671000228,
+      "trainable_parameters": 14909926,
+      "checkpoint_sha256": "c1349821c18b5037f83bcc305143acfa8d25631a80fbdfcf5151162d0cad0a4c",
+      "predictions_sha256": "4444365bf9bce13f3f7f8694e3c6c166297db62eb8864bb71bde326692b6c81d"
+    },
+    {
+      "variant": "descriptive_only",
+      "seed": 44,
+      "selected_epoch": 4,
+      "best_validation_f1": 0.8174681059862611,
+      "test": {
+        "precision": 0.739946380697051,
+        "recall": 0.8633993743482794,
+        "f1": 0.7969201154956689,
+        "accuracy": 0.8248235782482358,
+        "tp": 828,
+        "fp": 291,
+        "tn": 1159,
+        "fn": 131
+      },
+      "training_seconds": 1266.1660246310003,
+      "test_seconds": 6.416870963999827,
+      "trainable_parameters": 14909926,
+      "checkpoint_sha256": "ff2f61409e5547ded1abd98e3bbd5e5aec0ca903a982e8a9ecb25d19571a409e",
+      "predictions_sha256": "db297d4599b7b196c58d2e60516071e61dd3fc699288b975ca89eeac33f2275c"
+    }
+  ]
+}

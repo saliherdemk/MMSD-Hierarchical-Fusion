@@ -25,7 +25,8 @@ in `figures/clip_pipeline.tex`. Source-paper figure credits are in
 `figures/SOURCES.md` and the captions.
 
 The verification command needs no dataset, GPU, or training libraries. It checks
-33 prediction files (27 clean and six corruption conditions), labels and IDs,
+36 test prediction files (30 clean and six corruption conditions), seven
+ablation validation prediction files, labels and IDs,
 threshold decisions, four metrics, summary statistics, and validation-selected
 epochs. It does **not** certify the historical producing code.
 
@@ -49,8 +50,10 @@ difference, not a verified causal or statistically significant improvement.
 The experiment author confirms that the retained COCO-HFM baseline results were
 regenerated after the padding correction; both principal HFM variants use
 packed recurrence and masked text pooling/attention.
-Additional CLIP selection-rule explorations were not retained; their numbers
-are not presented as reproducible evidence in the paper.
+The descriptive-only CLIP control reaches 79.74% mean F1, versus 80.32% for
+sentiment-aware CLIP. The +0.58-point difference is positive across all three
+seeds. Validation screening selects the original zero-margin rule over stricter
+affective replacement. Compact evidence is in `fusion_clip/results_ablation/`.
 
 ## Data and training setup
 
@@ -74,7 +77,27 @@ are not presented as reproducible evidence in the paper.
    `CLIP_ATTRIBUTE_DIR` and `RUN_ROOT` paths. Run the notebook from top to bottom.
    It extracts attributes with pinned frozen CLIP, then trains seeds 42–44.
    The COCO predictor is not required for this branch; the supplied attribute
-   vocabulary and embedding matrix are reused.
+    vocabulary and embedding matrix are reused.
+
+### CLIP attribute follow-up experiments
+
+`fusion_clip/clip-attribute-ablation.ipynb` is a standalone notebook for the
+descriptive-only control and validation-selected affective-margin experiment.
+Edit the mounts and `OUTPUT_ROOT`, then run top to bottom. It caches the original
+five descriptive words and all affect/neutral scores in one frozen CLIP pass,
+screens margins `0, 0.01, 0.02, 0.04` on seed-42 validation F1, and freezes the
+selection before evaluating the finalists across seeds 42–44. A fresh zero-margin
+baseline is included. This takes 9–11 classifier fits, with completed screening
+fits reused. It saves predictions, insertion frequencies, paired errors,
+mean/SD tables, and `findings.md` under the new output root. Interrupted fits
+are preserved rather than overwritten; move an incomplete run aside before
+retrying, or use a fresh output root. Existing experiment outputs are unchanged.
+
+The imported results have a compact repository layout: `results_ablation/`
+contains `descriptive_only/seed_42`–`seed_44` and `summary.json`, seed-42
+threshold-screening evidence, and the reusable CLIP score cache. Duplicate
+sentiment-aware predictions reuse the original result directory. See
+`fusion_clip/results_ablation/README.md` for retained files and interpretation.
 
 Training notebooks target Kaggle GPU mounts. Saved multimodal configurations
 record Python 3.13.16, PyTorch 2.11.0+cu130, NumPy 2.1.3, CUDA 13.0, and cuDNN

@@ -1,0 +1,21 @@
+{
+  "variant": "descriptive_only",
+  "seed": 43,
+  "selected_epoch": 3,
+  "best_validation_f1": 0.813953488372093,
+  "test": {
+    "precision": 0.7343887423043096,
+    "recall": 0.8706986444212722,
+    "f1": 0.7967557251908397,
+    "accuracy": 0.8231631382316313,
+    "tp": 835,
+    "fp": 302,
+    "tn": 1148,
+    "fn": 124
+  },
+  "training_seconds": 1199.7493943230002,
+  "test_seconds": 6.192434671000228,
+  "trainable_parameters": 14909926,
+  "checkpoint_sha256": "c1349821c18b5037f83bcc305143acfa8d25631a80fbdfcf5151162d0cad0a4c",
+  "predictions_sha256": "4444365bf9bce13f3f7f8694e3c6c166297db62eb8864bb71bde326692b6c81d"
+}
