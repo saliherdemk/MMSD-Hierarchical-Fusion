@@ -23,3 +23,8 @@ not a license grant. Reuse and redistribution permissions have not been verified
 `clip_pipeline.tex` is an original TikZ vector schematic of the local CLIP
 attribute-extraction intervention. It is compiled directly by `report.tex` and
 does not depict measured attention weights or an observed example.
+# Presentation example
+
+`cai2019_weather_example.png` is the left-hand image extracted from Fig. 1(a)
+of Cai et al. (ACL 2019), `papers/main.pdf`, PDF page 2. Its accompanying tweet
+is “What a wonderful weather!”.
